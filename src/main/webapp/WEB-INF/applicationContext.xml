@@ -5,7 +5,7 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/bazardecosmeticos" />
+        <property name="url" value="jdbc:mysql://localhost:3306/bazardecosmeticos?useUnicode=true&amp;characterEncoding=UTF-8" />
         <property name="username" value="root" />
         <property name="password" value="root" />
     </bean>
@@ -18,6 +18,9 @@
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.connection.useUnicode">true</prop>
+                <prop key="hibernate.connection.characterEncoding">utf-8</prop>
+                <prop key="hibernate.connection.charSet">utf-8</prop>
             </props>
         </property>
         <property name="packagesToScan">
