@@ -19,10 +19,12 @@
                 <div class="col-md-5">
                     <h3>${product.productName}</h3>
                     <p>${product.productDescription}</p>
-                    <p><strong>Manufacturer</strong> : ${product.productManufacturer}</p>
-                    <p><strong>Category</strong> : ${product.productCategory}</p>
-                    <p><strong>Condition</strong> : ${product.productCondition}</p>
-                    <h4>${product.productPrice} USD</h4>
+                    <p><strong>Marca</strong> : ${product.productBrand}</p>
+                    <p><strong>Tipo</strong> : ${product.productType}</p>
+                    <p><strong>Preço original</strong> : ${product.productOriginalPrice} Reais</p>
+                    <p><strong>Desconto</strong> : ${product.productDiscount} Reais</p>
+                    <h4><strong>Preço final</strong> : ${product.productDiscountedPrice} Reais</h4>
+
                 </div>
             </div>
         </div>

@@ -16,8 +16,11 @@
             <tr class="bg-success">
                 <th>Imagem</th>
                 <th>Nome do Produto</th>
-                <th>Categoria</th>
-                <th>Preço</th>
+                <th>Tipo</th>
+                <th>Marca</th>
+                <th>Preço Original</th>
+                <th>Desconto</th>
+                <th>Preço com Desconto</th>
                 <th></th>
             </tr>
             </thead>
@@ -26,8 +29,11 @@
                     <td><img src="<c:url value="/resources/images/${product.productId}.png"/>" alt="image"
                              style="width:100%"/></td>
                     <td>${product.productName}</td>
-                    <td>${product.productCategory}</td>
-                    <td>${product.productPrice} Reais</td>
+                    <td>${product.productType}</td>
+                    <td>${product.productBrand}</td>
+                    <td>${product.productOriginalPrice} Reais</td>
+                    <td>${product.productDiscount} %</td>
+                    <td>${product.productDiscountedPrice} Reais</td>
                     <td><a href="<spring:url value="/productList/viewProduct/${product.productId}"/>">
                             <span class="glyphicon glyphicon-info-sign"></span>
                         </a>

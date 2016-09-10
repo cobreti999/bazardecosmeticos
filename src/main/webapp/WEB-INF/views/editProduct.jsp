@@ -6,8 +6,8 @@
 <div class="container-wrapper">
     <div class="container">
         <div class="page-header">
-            <h1>Edit Product</h1>
-            <p class="lead">Fill the information below to edit the product:</p>
+            <h1>Editar produto</h1>
+            <p class="lead">Preencha os campos abaixo para editar os dados do produto.</p>
         </div>
 
         <form:form action="${pageContext.request.contextPath}/admin/productInventory/editProduct"
@@ -16,80 +16,67 @@
             <form:hidden path="productId" value="${product.productId}" />
         <!-- Label and TextField -->
         <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name">Nome do Produto</label> <form:errors path="productName" cssStyle="color: #ff0000;" />
             <form:input path="productName" id="name" class="form-Control" />
             <!-- after submit, this field will bind to productName. form-Control controls the width -->
         </div>
 
-        <!-- RadioButtons -->
+        <!-- Label and TextField -->
         <div class="form-group">
-            <label for="category">Category</label>
-            <label class="checkbox-inline">
-                <form:radiobutton path="productCategory" id="category" value="instrument"/>Instrument
-            </label>
-            <label class="checkbox-inline">
-                <form:radiobutton path="productCategory" id="category" value="record"/>Record
-            </label>
-            <label class="checkbox-inline">
-                <form:radiobutton path="productCategory" id="category" value="accessory"/>Accessory
-            </label>
+            <label for="type">Tipo/Categoria</label>
+            <form:input path="productType" id="type" class="form-Control" />
         </div>
 
         <!-- Label and TextField -->
         <div class="form-group">
-            <label for="description">Description</label>
+            <label for="description">Descrição</label>
             <form:textarea path="productDescription" id="description" class="form-Control" />
         </div>
 
         <!-- Label and TextField -->
         <div class="form-group">
-            <label for="price">Price</label>
-            <form:input path="productPrice" id="price" class="form-Control" />
+            <label for="originalPrice">Preço Original</label> <form:errors path="productOriginalPrice" cssStyle="color: #ff0000;" />
+            <form:input path="productOriginalPrice" id="originalPrice" class="form-Control" />
         </div>
 
-        <!-- RadioButtons -->
+        <!-- Label and TextField -->
         <div class="form-group">
-            <label for="condition">Condition</label>
-            <label class="checkbox-inline">
-                <form:radiobutton path="productCondition" id="condition" value="new"/>New
-            </label>
-            <label class="checkbox-inline">
-                <form:radiobutton path="productCondition" id="condition" value="used"/>Used
-            </label>
+            <label for="discountedPrice">Preço com Desconto</label> <form:errors path="productDiscountedPrice" cssStyle="color: #ff0000;" />
+            <form:input path="productDiscountedPrice" id="discountedPrice" class="form-Control" />
         </div>
 
         <!-- RadioButtons -->
         <div class="form-group">
             <label for="status">Status</label>
             <label class="checkbox-inline">
-                <form:radiobutton path="productStatus" id="status" value="active"/>Active
+                <form:radiobutton path="productStatus" id="status" value="active"/>Disponível
             </label>
             <label class="checkbox-inline">
-                <form:radiobutton path="productStatus" id="status" value="inactive"/>Inactive
+                <form:radiobutton path="productStatus" id="status" value="inactive"/>Não Disponível
             </label>
         </div>
 
         <!-- Label and TextField -->
         <div class="form-group">
-            <label for="unitInStock">Unit in Stock</label>
+            <label for="unitInStock">Unidades em Estoque</label> <form:errors path="unitInStock" cssStyle="color: #ff0000;" />
             <form:input path="unitInStock" id="unitInStock" class="form-Control" />
         </div>
 
         <!-- Label and TextField -->
         <div class="form-group">
-            <label for="manufacturer">Manufacturer</label>
-            <form:input path="productManufacturer" id="manufacturer" class="form-Control" />
+            <label for="brand">Marca</label>
+            <form:input path="productBrand" id="brand" class="form-Control" />
         </div>
 
         <!-- File upload-->
         <div class="form-group">
-            <label class="control-label" for="productImage">Upload Picture</label>
+            <label class="control-label" for="productImage">Enviar Imagem</label>
             <form:input path="productImage" id="productImage" type="file" class="form:input-large"/>
         </div>
 
         <br><br>
         <input type="submit" value="submit" class="btn btn-default">
-        <a href="<c:url value="/admin/productInventory"/>" class="btn btn-default">Cancel</a>
+        <a href="<c:url value="/admin/productInventory"/>" class="btn btn-default">Cancelar</a>
 
         </form:form>
 

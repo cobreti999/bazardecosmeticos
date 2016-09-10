@@ -38,7 +38,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>Escolha sua consultora favorita</h1>
-                        <p>Nossas consultoras possuem os produtos com o preço mais baixo do mercado!!</p>
+                        <p>Nossas consultoras possuem os produtos com o preço mais baixo do mercado!</p>
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
             <div class="col-lg-4">
                 <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
                 <h2>Heading</h2>
-                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilidade in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
                 <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
             </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->

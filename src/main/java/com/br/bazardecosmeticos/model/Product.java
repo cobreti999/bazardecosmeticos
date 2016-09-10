@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import java.text.DecimalFormat;
 
 /**
  * Created by lailson on 9/6/16.
@@ -17,19 +17,21 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int productId;
 
-    @NotEmpty(message = "The product name must be different than null.")
+    @NotEmpty(message = "O produto precisa ter um nome.")
     private String productName;
-    private String productCategory;
+    private String productType;
     private String productDescription;
 
-    @Min(value = 0, message = "The product price must not be less than 0.")
-    private double productPrice;
-    private String productCondition;
+    @Min(value = 0, message = "O produto precisa ter preço maior que 0")
+    private double productOriginalPrice;
+    @Min(value = 0, message = "O produto precisa ter preço maior que 0")
+    private double productDiscountedPrice;
+    private double productDiscount;
     private String productStatus;
 
     @Min(value = 0, message = "The product unit must not be less than 0.")
     private int unitInStock;
-    private String productManufacturer;
+    private String productBrand;
 
     //with the transient annotation, hibernate won't create a column in the table for productImage
     //the image will be stored in resources
@@ -52,12 +54,12 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductCategory() {
-        return productCategory;
+    public String getProductType() {
+        return productType;
     }
 
-    public void setProductCategory(String productCategory) {
-        this.productCategory = productCategory;
+    public void setProductType(String productType) {
+        this.productType = productType;
     }
 
     public String getProductDescription() {
@@ -68,20 +70,12 @@ public class Product {
         this.productDescription = productDescription;
     }
 
-    public double getProductPrice() {
-        return productPrice;
+    public double getProductOriginalPrice() {
+        return productOriginalPrice;
     }
 
-    public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public String getProductCondition() {
-        return productCondition;
-    }
-
-    public void setProductCondition(String productCondition) {
-        this.productCondition = productCondition;
+    public void setProductOriginalPrice(double productOriginalPrice) {
+        this.productOriginalPrice = productOriginalPrice;
     }
 
     public String getProductStatus() {
@@ -100,12 +94,12 @@ public class Product {
         this.unitInStock = unitInStock;
     }
 
-    public String getProductManufacturer() {
-        return productManufacturer;
+    public String getProductBrand() {
+        return productBrand;
     }
 
-    public void setProductManufacturer(String productManufacturer) {
-        this.productManufacturer = productManufacturer;
+    public void setProductBrand(String productBrand) {
+        this.productBrand = productBrand;
     }
 
     public MultipartFile getProductImage() {
@@ -115,4 +109,32 @@ public class Product {
     public void setProductImage(MultipartFile productImage) {
         this.productImage = productImage;
     }
+
+    public double getProductDiscountedPrice() {
+        return productDiscountedPrice;
+    }
+
+    public void setProductDiscountedPrice(double productDiscountedPrice) {
+        this.productDiscountedPrice = productDiscountedPrice;
+    }
+
+    /*public double getProductDiscount() {
+        return productDiscount;
+    }*/
+
+    public double getProductDiscount(){
+        DecimalFormat df = new DecimalFormat("#00");
+        double discount = Math.abs(((getProductDiscountedPrice()/getProductOriginalPrice()) -1)*100);
+        return Double.valueOf(df.format(discount));
+    }
+
+    public void setProductDiscount(double productDiscount) {
+        this.productDiscount = productDiscount;
+    }
+
+    /*public void setProductDiscount(){
+        DecimalFormat df = new DecimalFormat("#00");
+        double discount = Math.abs(((getProductDiscountedPrice()/getProductOriginalPrice()) -1)*100);
+        this.productDiscount = Double.valueOf(df.format(discount));
+    }*/
 }

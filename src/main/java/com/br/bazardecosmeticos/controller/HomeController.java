@@ -69,8 +69,6 @@ public class HomeController {
     public String addProduct(Model model){
         Product product = new Product();
         //Default selected values
-        product.setProductCategory("instrument");
-        product.setProductCondition("new");
         product.setProductStatus("active");
         model.addAttribute("product", product);
         return "addProduct";
