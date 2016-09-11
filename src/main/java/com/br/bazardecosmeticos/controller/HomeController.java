@@ -82,6 +82,7 @@ public class HomeController {
         if (result.hasErrors()){
             return "addProduct";
         }
+        product.setProductDiscount();
         productDao.addProduct(product);
         MultipartFile productImage = product.getProductImage();
         String rootDirectory = request.getSession().getServletContext().getRealPath("/");
@@ -146,6 +147,7 @@ public class HomeController {
                 throw new RuntimeException("Product Image  saving failed!", e);
             }
         }
+        product.setProductDiscount();
         productDao.editProduct(product);
         return "redirect:/admin/productInventory";
     }

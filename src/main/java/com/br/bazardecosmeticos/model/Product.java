@@ -128,13 +128,13 @@ public class Product {
         return Double.valueOf(df.format(discount));
     }
 
-    public void setProductDiscount(double productDiscount) {
+    /*public void setProductDiscount(double productDiscount) {
         this.productDiscount = productDiscount;
-    }
+    }*/
 
-    /*public void setProductDiscount(){
+    public void setProductDiscount(){
         DecimalFormat df = new DecimalFormat("#00");
         double discount = Math.abs(((getProductDiscountedPrice()/getProductOriginalPrice()) -1)*100);
         this.productDiscount = Double.valueOf(df.format(discount));
-    }*/
+    }
 }
