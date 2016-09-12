@@ -1,0 +1,4 @@
+com/br/bazardecosmeticos/model/Product.class
+com/br/bazardecosmeticos/dao/ProductDao.class
+com/br/bazardecosmeticos/dao/impl/ProductDaoImpl.class
+com/br/bazardecosmeticos/controller/HomeController.class
