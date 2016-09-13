@@ -16,41 +16,41 @@ import java.util.Map;
 @Repository
 public class CartDaoImpl implements CartDao{
 
-    private Map<Integer, Cart> listOfCarts;
+    private Map<String, Cart> listOfCarts;
 
     public CartDaoImpl() {
-        this.listOfCarts = new HashMap<Integer, Cart>();
+        this.listOfCarts = new HashMap<String, Cart>();
     }
 
     @Override
     public Cart create(Cart cart) {
         if (listOfCarts.keySet().contains(cart.getCartId())){
-            throw new IllegalArgumentException(String.format("Impossible to create a cart. " +
-                    "A cart with the given id already exists.", cart.getCartId()));
+            throw new IllegalArgumentException("Impossible to create a cart. " +
+                    "A cart with the given id already exists." + cart.getCartId());
         }
         listOfCarts.put(cart.getCartId(), cart);
         return cart;
     }
 
     @Override
-    public Cart read(int cartId) {
+    public Cart read(String cartId) {
         return listOfCarts.get(cartId);
     }
 
     @Override
-    public void update(int cartId, Cart cart) {
+    public void update(String cartId, Cart cart) {
         if (!listOfCarts.keySet().contains(cartId)){
-            throw new IllegalArgumentException(String.format("Impossible to update cart. " +
-                    "A cart with this id doesn't exists.", cart.getCartId()));
+            throw new IllegalArgumentException("Impossible to update cart. " +
+                    "A cart with this id doesn't exists." + cart.getCartId());
         }
         listOfCarts.put(cartId, cart);
     }
 
     @Override
-    public void delete(int cartId) {
+    public void delete(String cartId) {
         if (!listOfCarts.keySet().contains(cartId)){
-            throw new IllegalArgumentException(String.format("Cannot delete cart. " +
-                    "A cart with this id doesn't exists.", cartId));
+            throw new IllegalArgumentException("Cannot delete cart. " +
+                    "A cart with this id doesn't exists." + cartId);
         }
         listOfCarts.remove(cartId);
     }

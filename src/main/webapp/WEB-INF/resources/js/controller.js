@@ -22,7 +22,6 @@ cartApp.controller("cartCtrl", function($scope, $http){
     };
     
     $scope.addToCart = function (productId) {
-        alert("teste url: /bazardecosmeticos/rest/cart/add/"+productId);
         $http.put('/bazardecosmeticos/rest/cart/add/'+productId).success(function (data) {
             $scope.refreshCart($http.get('/bazardecosmeticos/rest/cart/cartId'));
             alert("Produto adicionado ao carrinho com sucesso!");

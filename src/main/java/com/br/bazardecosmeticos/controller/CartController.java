@@ -29,7 +29,7 @@ public class CartController {
     //ResponseBody is for returning a model object (Card) in the format of a json
     //We retrieve the cartId from the url and put that in the model
     @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
-    public @ResponseBody Cart read(@PathVariable(value = "cartId") int cartId){
+    public @ResponseBody Cart read(@PathVariable(value = "cartId") String cartId){
         //Return the Cart with the cartId in the url
         return cartDao.read(cartId);
     }
@@ -37,7 +37,7 @@ public class CartController {
     //PUT - update method from http
     @RequestMapping(value = "/{cartId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@PathVariable(value = "cartId") int cartId, @RequestBody Cart cart){
+    public void update(@PathVariable(value = "cartId") String cartId, @RequestBody Cart cart){
         //RequestBody - Spring Takes the body of the request and transform it to a cart (contrario do ResponseBody)
         cartDao.update(cartId, cart);
     }
@@ -45,18 +45,14 @@ public class CartController {
     @RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     //Retrieve the PathVariable, gives it the valueName of "cartId" and give it's value to the int cartId
-    public void delete(@PathVariable(value = "cartId") int cartId ){
+    public void delete(@PathVariable(value = "cartId") String cartId ){
         cartDao.delete(cartId);
     }
 
     @RequestMapping(value = "/add/{productId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void addItem(@PathVariable(value = "productId") int productId, HttpServletRequest request){
-        String teste = request.getSession(true).getId();
-        System.out.println("SESSAO TESTE: " + teste);int sessionId=0;
-        try {
-            sessionId = Integer.parseInt(request.getSession(true).getId());
-        }catch(Exception e){e.printStackTrace();}
+        String sessionId = request.getSession(true).getId();
         Cart cart = cartDao.read(sessionId);
         if (cart == null){
             cart = cartDao.create(new Cart(sessionId));
@@ -72,7 +68,7 @@ public class CartController {
     @RequestMapping(value = "/remove/{productId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void removeItem(@PathVariable int productId, HttpServletRequest request){
-        int sessionId = Integer.parseInt(request.getSession(true).getId());
+        String sessionId = request.getSession(true).getId();
         Cart cart = cartDao.read(sessionId);
         if (cart == null){
             cart = cartDao.create(new Cart(sessionId));

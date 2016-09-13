@@ -7,35 +7,36 @@ import java.util.Map;
  * Created by lailson on 9/12/16.
  */
 public class Cart {
-    private int cartId;
-    private Map<Integer, CartItem> cartItems;
+    private String cartId;
+    private Map<String, CartItem> cartItems;
     private double grandTotalDiscountedPrice;
     private double grandTotalOriginalPrice;
 
     private Cart(){
-        cartItems = new HashMap<Integer, CartItem>();
+        cartItems = new HashMap<String, CartItem>();
         grandTotalDiscountedPrice = 0;
         grandTotalOriginalPrice = 0;
     }
 
-    public Cart(int cartId){
+    public Cart(String cartId){
         this();
         this.cartId = cartId;
     }
 
-    public int getCartId() {
+
+    public String getCartId() {
         return cartId;
     }
 
-    public void setCartId(int cartId) {
+    public void setCartId(String cartId) {
         this.cartId = cartId;
     }
 
-    public Map<Integer, CartItem> getCartItems() {
+    public Map<String, CartItem> getCartItems() {
         return cartItems;
     }
 
-    public void setCartItems(Map<Integer, CartItem> cartItems) {
+    public void setCartItems(Map<String, CartItem> cartItems) {
         this.cartItems = cartItems;
     }
 
@@ -56,10 +57,14 @@ public class Cart {
     }
 
     public void addCartIdem(CartItem item){
-        int productId = item.getProduct().getProductId();
+        String productId = String.valueOf(item.getProduct().getProductId());
         if (cartItems.containsKey(productId)){
             CartItem existingCartItem = cartItems.get(productId);
             existingCartItem.setQuantity(existingCartItem.getQuantity()+item.getQuantity());
+            existingCartItem.setTotalDiscountedPrice(existingCartItem.getTotalDiscountedPrice() +
+                    item.getTotalDiscountedPrice());
+            existingCartItem.setTotalOriginalPrice(existingCartItem.getTotalOriginalPrice() +
+                    item.getTotalOriginalPrice());
             cartItems.put(productId, existingCartItem);
         }else{
             cartItems.put(productId, item);
@@ -69,7 +74,7 @@ public class Cart {
 
     public void removeCartItem(CartItem item){
         int productId = item.getProduct().getProductId();
-        cartItems.remove(productId);
+        cartItems.remove(String.valueOf(productId));
         updateGrandTotal();
     }
 

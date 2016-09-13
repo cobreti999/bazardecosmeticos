@@ -8,7 +8,10 @@ import com.br.bazardecosmeticos.model.Cart;
 public interface CartDao {
 
     Cart create(Cart cart);
-    Cart read(int cartId);
+    /*Cart read(int cartId);
     void update(int cartId, Cart cart);
-    void delete(int cartId);
+    void delete(int cartId);*/
+    Cart read(String cartId);
+    void update(String cartId, Cart cart);
+    void delete(String cartId);
 }
