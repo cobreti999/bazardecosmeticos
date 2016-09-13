@@ -17,7 +17,7 @@
             <!-- this cartId comes from the cartItemController (model.addAtribute) -->
             <div ng-controller = "cartCtrl" ng-init="initCartId('${cartId}')">
                 <div>
-                    <a class="btn btn-danger pull-left">
+                    <a class="btn btn-danger pull-left" ng-click="clearCart()">
                         <span class="glyphicon glyphicon-remove-sign"></span>Limpar Carrinho</a>
                 </div>
 
@@ -46,16 +46,18 @@
                     <tr>
                         <th></th>
                         <th></th>
-                        <th>Total</th>
-                        <th>grandTotalDiscountedPrice</th>
+                        <th>Preço Final Original</th>
+                        <th>{{cart.grandTotalOriginalPrice}}</th>
+                        <th>Preço Final Com Desconto</th>
+                        <th>{{cart.grandTotalDiscountedPrice}}</th>
                         <th></th>
                     </tr>
                 </table>
-                <a href="<spring:url value="/productList"/>">Continuar Comprando</a>
+                <a href="<spring:url value="/productList"/>" class="btn btn-default">Continuar Comprando</a>
             </div>
         </section>
     </div>
 </div>
 
-
+<script src="<c:url value="/resources/js/controller.js"/>"></script>
 <%@include file="/WEB-INF/views/template/footer.jsp"%>

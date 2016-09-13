@@ -52,7 +52,11 @@ public class CartController {
     @RequestMapping(value = "/add/{productId}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void addItem(@PathVariable(value = "productId") int productId, HttpServletRequest request){
-        int sessionId = Integer.parseInt(request.getSession(true).getId());
+        String teste = request.getSession(true).getId();
+        System.out.println("SESSAO TESTE: " + teste);int sessionId=0;
+        try {
+            sessionId = Integer.parseInt(request.getSession(true).getId());
+        }catch(Exception e){e.printStackTrace();}
         Cart cart = cartDao.read(sessionId);
         if (cart == null){
             cart = cartDao.create(new Cart(sessionId));

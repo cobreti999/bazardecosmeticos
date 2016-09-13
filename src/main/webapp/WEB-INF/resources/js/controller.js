@@ -13,7 +13,7 @@ cartApp.controller("cartCtrl", function($scope, $http){
     };
 
     $scope.clearCart = function () {
-        $http.delete('/bazardecosmeticos/rest/cart' + $scope.cartId).success($scope.refreshCart($scope.cartId));
+        $http.delete('/bazardecosmeticos/rest/cart/' + $scope.cartId).success($scope.refreshCart($scope.cartId));
     };
     
     $scope.initCartId = function (cartId) {
@@ -22,7 +22,8 @@ cartApp.controller("cartCtrl", function($scope, $http){
     };
     
     $scope.addToCart = function (productId) {
-        $http.put('/bazardecosmeticos/rest/cart/add'+productId).success(function (data) {
+        alert("teste url: /bazardecosmeticos/rest/cart/add/"+productId);
+        $http.put('/bazardecosmeticos/rest/cart/add/'+productId).success(function (data) {
             $scope.refreshCart($http.get('/bazardecosmeticos/rest/cart/cartId'));
             alert("Produto adicionado ao carrinho com sucesso!");
         });
