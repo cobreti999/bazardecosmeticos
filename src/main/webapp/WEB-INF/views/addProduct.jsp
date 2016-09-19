@@ -10,7 +10,7 @@
             <p class="lead">Preencha os campos para adicionar um produto:</p>
         </div>
 
-        <form:form action="${pageContext.request.contextPath}/admin/productInventory/addProduct"
+        <form:form action="${pageContext.request.contextPath}/admin/product/addProduct"
                    method="post" commandName="product" enctype="multipart/form-data"> <!-- product comes from the model-->
 
             <!-- Label and TextField -->

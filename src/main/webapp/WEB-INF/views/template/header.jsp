@@ -49,14 +49,25 @@
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li><a href="<c:url value="/" />">Home</a></li>
-                                <li><a href="<c:url value="/consultoras" />">Consultoras</a></li>
-                                <li><a href="<c:url value="/productList" />">Produtos</a></li>
-                                <li><a href="<c:url value="/contato"/>">Contato</a></li>
+                                <li><a href="<c:url value="#" />">Consultoras</a></li>
+                                <li><a href="<c:url value="/product/productList" />">Produtos</a></li>
+                                <li><a href="<c:url value="#"/>">Contato</a></li>
                             </ul>
                             <ul class="nav navbar-nav pull-right">
-                                <li><a href="<c:url value="/admin"/>">Admin</a></li>
-                                <li><a href="<c:url value="/login"/>">Entrar</a></li>
-                                <li><a href="<c:url value="/cadastro"/>">Cadastre-se</a></li>
+                                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                                    <li><a>Bem vindo: ${pageContext.request.userPrincipal.name}</a></li>
+                                    <li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
+                                    <c:if test="${pageContext.request.userPrincipal.name !='admin'}">
+                                        <li><a href="<c:url value="/customer/cart" />">Cart</a></li>
+                                    </c:if>
+                                    <c:if test="${pageContext.request.userPrincipal.name =='admin'}">
+                                        <li><a href="<c:url value="/admin" />">Admin</a></li>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${pageContext.request.userPrincipal.name == null}">
+                                    <li><a href="<c:url value="/login" />">Login</a></li>
+                                    <li><a href="<c:url value="/register" />">Cadastre-se</a></li>
+                                </c:if>
                             </ul>
                         </div>
                     </div>

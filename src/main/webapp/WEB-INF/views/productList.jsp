@@ -34,7 +34,7 @@
                     <td>${product.productOriginalPrice} Reais</td>
                     <td>${product.productDiscount} %</td>
                     <td>${product.productDiscountedPrice} Reais</td>
-                    <td><a href="<spring:url value="/productList/viewProduct/${product.productId}"/>">
+                    <td><a href="<spring:url value="/product/viewProduct/${product.productId}"/>">
                             <span class="glyphicon glyphicon-info-sign"></span>
                         </a>
                     </td>

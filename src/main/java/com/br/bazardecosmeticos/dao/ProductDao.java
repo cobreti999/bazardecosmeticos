@@ -9,13 +9,13 @@ import java.util.List;
  */
 public interface ProductDao {
 
+    Product getProductById(int id);
+
+    List<Product> getProductList ();
+
     void addProduct(Product product);
 
     void editProduct(Product product);
 
-    Product getProductById(int id);
-
-    List<Product> getAllProducts();
-
-    void deleteProduct(int id);
+    void deleteProduct(Product product);
 }

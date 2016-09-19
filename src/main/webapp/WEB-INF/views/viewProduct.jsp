@@ -1,8 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@include file="/WEB-INF/views/template/header.jsp"%>
+<security:authorize access="hasRole('ROLE_ADMIN')" var="isAdmin" />
 
 <div class="container-wrapper">
     <div class="container">
@@ -27,11 +29,9 @@
                     <h4><strong>Preço final</strong> : ${product.productDiscountedPrice} Reais</h4>
 
                     <br>
-                    <!-- jstl function set to define a variable role available to all page from param.role
-                    This is to avoid using an express language inside a express language-->
-                    <c:set var="role" scope="page" value="${param.role}" />
-                    <c:set var="url" scope="page" value="/productList" />
-                    <c:if test="${role=='admin'}">
+
+                    <c:set var="url" scope="page" value="/product/productList" />
+                    <c:if test="${isAdmin}">
                         <c:set var="url" scope="page" value="/admin/productInventory" />
                     </c:if>
 
@@ -41,7 +41,7 @@
                         <a href="<c:url value="${url}" />" class="btn btn-default">Back</a>
                         <a href="#" class="btn btn-warning btn-large" ng-click="addToCart('${product.productId}')">
                             <span class="glyphicon glyphicon-shopping-cart"></span>Adicionar ao Carrinho!</a>
-                        <a href="<spring:url value="/cart" />" class="btn btn-default">
+                        <a href="<spring:url value="/customer/cart" />" class="btn btn-default">
                             <span class="glyphicon glyphicon-hand-right"></span>Ver Carrinho</a>
                     </p>
 

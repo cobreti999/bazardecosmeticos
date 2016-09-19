@@ -46,10 +46,11 @@
 
     <!-- Spring security-->
     <security:http auto-config="true">
-        <security:intercept-url pattern="/admin/**" access="ROLE_USER" />
+        <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+        <security:intercept-url pattern="/customer/**" access="ROLE_USER" />
         <security:form-login
             login-page="/login"
-            default-target-url="/admin/"
+            default-target-url="/product/productList/"
             authentication-failure-url="/login?error"
             username-parameter="username"
             password-parameter="password" />
@@ -64,5 +65,8 @@
                                         users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?" />
         </security:authentication-provider>
     </security:authentication-manager>
+
+    <bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+
 
 </beans>

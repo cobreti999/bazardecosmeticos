@@ -47,13 +47,13 @@
                         <th></th>
                         <th></th>
                         <th>Preço Final Original</th>
-                        <th>{{cart.grandTotalOriginalPrice}}</th>
+                        <th>{{calcGrandTotalOriginalPrice()}}</th>
                         <th>Preço Final Com Desconto</th>
-                        <th>{{cart.grandTotalDiscountedPrice}}</th>
+                        <th>{{calcGrandTotalDiscountedPrice()}}</th>
                         <th></th>
                     </tr>
                 </table>
-                <a href="<spring:url value="/productList"/>" class="btn btn-default">Continuar Comprando</a>
+                <a href="<spring:url value="/product/productList"/>" class="btn btn-default">Continuar Comprando</a>
             </div>
         </section>
     </div>

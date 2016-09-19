@@ -10,7 +10,7 @@
             <p class="lead">Preencha os campos abaixo para editar os dados do produto.</p>
         </div>
 
-        <form:form action="${pageContext.request.contextPath}/admin/productInventory/editProduct"
+        <form:form action="${pageContext.request.contextPath}/admin/product/editProduct"
                    method="post" commandName="product" enctype="multipart/form-data"> <!-- product comes from the model-->
             <!-- This form is necessary in order for productId to be != null-->
             <form:hidden path="productId" value="${product.productId}" />

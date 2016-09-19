@@ -1,92 +1,42 @@
 package com.br.bazardecosmeticos.controller;
 
-import com.br.bazardecosmeticos.dao.CartDao;
-import com.br.bazardecosmeticos.dao.ProductDao;
-import com.br.bazardecosmeticos.model.Cart;
-import com.br.bazardecosmeticos.model.CartItem;
-import com.br.bazardecosmeticos.model.Product;
+import com.br.bazardecosmeticos.model.Customer;
+import com.br.bazardecosmeticos.service.CartService;
+import com.br.bazardecosmeticos.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Created by lailson on 9/12/16.
+ * Created by lailson on 9/19/16.
  */
 
 @Controller
-@RequestMapping("/rest/cart")
+@RequestMapping("/customer/cart")
 public class CartController {
+    @Autowired
+    private CartService cartService;
 
     @Autowired
-    private CartDao cartDao;
+    private CustomerService customerService;
 
-    @Autowired
-    private ProductDao productDao;
-
-    //ResponseBody is for returning a model object (Card) in the format of a json
-    //We retrieve the cartId from the url and put that in the model
-    @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
-    public @ResponseBody Cart read(@PathVariable(value = "cartId") String cartId){
-        //Return the Cart with the cartId in the url
-        return cartDao.read(cartId);
+    @RequestMapping
+    public String getCart(@AuthenticationPrincipal User activeUser) {
+        //@AuthenticationPrincial is used to get the information about the current user logged in
+        Customer customer = customerService.getCustomerByUsername(activeUser.getUsername());
+        int cartId = customer.getCart().getCartId();
+        return "redirect:/customer/cart/"+cartId;
     }
 
-    //PUT - update method from http
-    @RequestMapping(value = "/{cartId}", method = RequestMethod.PUT)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@PathVariable(value = "cartId") String cartId, @RequestBody Cart cart){
-        //RequestBody - Spring Takes the body of the request and transform it to a cart (contrario do ResponseBody)
-        cartDao.update(cartId, cart);
+    @RequestMapping(value="/{cartId}", method = RequestMethod.GET)
+    public String getCartRedirect(@PathVariable(value = "cartId") int cartId, Model model) {
+        model.addAttribute("cartId", cartId);
+        return "cart";
     }
-
-    @RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    //Retrieve the PathVariable, gives it the valueName of "cartId" and give it's value to the int cartId
-    public void delete(@PathVariable(value = "cartId") String cartId ){
-        cartDao.delete(cartId);
-    }
-
-    @RequestMapping(value = "/add/{productId}", method = RequestMethod.PUT)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void addItem(@PathVariable(value = "productId") int productId, HttpServletRequest request){
-        String sessionId = request.getSession(true).getId();
-        Cart cart = cartDao.read(sessionId);
-        if (cart == null){
-            cart = cartDao.create(new Cart(sessionId));
-        }
-        Product product = productDao.getProductById(productId);
-        if (product == null){
-            throw new IllegalArgumentException(new Exception());
-        }
-        cart.addCartIdem(new CartItem(product));
-        cartDao.update(sessionId,cart);
-    }
-
-    @RequestMapping(value = "/remove/{productId}", method = RequestMethod.PUT)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void removeItem(@PathVariable int productId, HttpServletRequest request){
-        String sessionId = request.getSession(true).getId();
-        Cart cart = cartDao.read(sessionId);
-        if (cart == null){
-            cart = cartDao.create(new Cart(sessionId));
-        }
-        Product product = productDao.getProductById(productId);
-        if (product == null){
-            throw new IllegalArgumentException(new Exception());
-        }
-        cart.removeCartItem(new CartItem(product));
-        cartDao.update(sessionId,cart);
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Illegal request, please verify your payload")
-    public void handleClientErrors(Exception e){}
-
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Internal Server Error")
-    public void handleServerErrors(Exception e){}
-
+    //These two methods are just to add the cartId to the model
 }
