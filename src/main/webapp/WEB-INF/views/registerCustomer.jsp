@@ -16,7 +16,7 @@
         <h3>Informações básicas</h3>
 
         <div class="form-group">
-            <label for="name">Nome Completo</label>
+            <label for="name">Nome Completo</label><form:errors path="customerName" cssStyle="color:#ff0000" />
             <form:input path="customerName" id="name" class="form-Control"/>
         </div>
 

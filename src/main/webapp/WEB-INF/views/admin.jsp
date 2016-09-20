@@ -23,5 +23,13 @@
 
         <p>Aqui você pode ver todo o inventário de produtos disponíveis!</p>
 
+        <br><br>
+
+        <h3>
+            <a href="<c:url value="/admin/customer"/>"> Gerenciamento de Clientes</a>
+        </h3>
+
+        <p>Aqui você pode ver as informações de todos os clientes cadastrados!</p>
+
 
 <%@include file="/WEB-INF/views/template/footer.jsp"%>

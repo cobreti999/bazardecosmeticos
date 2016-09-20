@@ -45,23 +45,23 @@ public class RegisterController {
         if (result.hasErrors()) {
             return "registerCustomer";
         }
-        /*
+
         List<Customer> customerList = customerService.getAllCustomers();
 
         for (int i=0; i<customerList.size(); i++) {
-            if(customer.getCustomerEmail().equals(customerList.get(i).getCustomerEmail())) {
-                model.addAttribute("emailMsg", "Email already exists.");
+            if(customer.getCustomerEmail().equalsIgnoreCase(customerList.get(i).getCustomerEmail())) {
+                model.addAttribute("emailMsg", "Esse email já está sendo usado.");
 
                 return "registerCustomer";
             }
 
             if(customer.getUsername().equals(customerList.get(i).getUsername())) {
 
-                model.addAttribute("usernameMsg", "Username already exists.");
+                model.addAttribute("usernameMsg", "Esse nome de usuário já está sendo usado.");
 
                 return "registerCustomer";
             }
-        }*/
+        }
 
         customer.setEnabled(true);
         customerService.addCustomer(customer);

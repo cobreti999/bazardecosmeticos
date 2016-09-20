@@ -1,7 +1,9 @@
 package com.br.bazardecosmeticos.controller.admin;
 
+import com.br.bazardecosmeticos.model.Customer;
 import com.br.bazardecosmeticos.model.Product;
 import com.br.bazardecosmeticos.service.ProductService;
+import com.br.bazardecosmeticos.service.impl.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +22,8 @@ public class AdminHome {
     @Autowired
     private ProductService productService;
 
-    /*@Autowired
-    private CustomerServiceImpl customerService;*/
+    @Autowired
+    private CustomerServiceImpl customerService;
 
     @RequestMapping
     public String adminPage() {
@@ -37,8 +39,8 @@ public class AdminHome {
 
     @RequestMapping("/customer")
     public String customerManagement(Model model) {
-        /*List<Customer> customerList = customerService.getAllCustomers();
-        model.addAttribute(customerList);*/
+        List<Customer> customerList = customerService.getAllCustomers();
+        model.addAttribute(customerList);
 
         return "customerManagement";
     }
