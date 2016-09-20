@@ -19,6 +19,9 @@
                 <div>
                     <a class="btn btn-danger pull-left" ng-click="clearCart()">
                         <span class="glyphicon glyphicon-remove-sign"></span>Limpar Carrinho</a>
+                    <a href="<spring:url value="/order/${cartId}"/>" class="btn btn-success pull-right"> <span
+                            class="glyphicon-shopping-cart glyphicon"></span> Realizar Pedido
+                    </a>
                 </div>
 
                 <table class="table table-hover">
@@ -41,7 +44,7 @@
                         <td>{{item.totalDiscountedPrice}}</td>
                         <!-- ng-click = action: call removeFromCart and refresh the cart from the js controller-->
                         <td><a href="#" class="label label-danger" ng-click="removeFromCart(item.product.productId)">
-                            <span class="glyphicon glyphicon-remove"></span>remove</a></td>
+                            <span class="glyphicon glyphicon-remove"></span>Remover item</a></td>
                     </tr>
                     <tr>
                         <th></th>

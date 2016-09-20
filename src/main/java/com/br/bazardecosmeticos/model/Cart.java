@@ -1,90 +1,72 @@
 package com.br.bazardecosmeticos.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by lailson on 9/12/16.
  */
-public class Cart {
-    private String cartId;
-    private Map<String, CartItem> cartItems;
-    private double grandTotalDiscountedPrice;
-    private double grandTotalOriginalPrice;
 
-    private Cart(){
-        cartItems = new HashMap<String, CartItem>();
-        grandTotalDiscountedPrice = 0;
-        grandTotalOriginalPrice = 0;
-    }
+@Entity
+public class Cart implements Serializable{
 
-    public Cart(String cartId){
-        this();
-        this.cartId = cartId;
-    }
+    private static final long serialVersionUID = 4319849415624180013L;
 
+    @Id
+    @GeneratedValue
+    private int cartId;
 
-    public String getCartId() {
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<CartItem> cartItems;
+
+    @OneToOne
+    @JoinColumn(name = "customerId")
+    @JsonIgnore
+    private Customer customer;
+
+    private double grandTotalOriginal;
+    private double grandTotalDiscounted;
+
+    public int getCartId() {
         return cartId;
     }
 
-    public void setCartId(String cartId) {
+    public void setCartId(int cartId) {
         this.cartId = cartId;
     }
 
-    public Map<String, CartItem> getCartItems() {
+    public List<CartItem> getCartItems() {
         return cartItems;
     }
 
-    public void setCartItems(Map<String, CartItem> cartItems) {
+    public void setCartItems(List<CartItem> cartItems) {
         this.cartItems = cartItems;
     }
 
-    public double getGrandTotalDiscountedPrice() {
-        return grandTotalDiscountedPrice;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setGrandTotalDiscountedPrice(double grandTotalDiscountedPrice) {
-        this.grandTotalDiscountedPrice = grandTotalDiscountedPrice;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public double getGrandTotalOriginalPrice() {
-        return grandTotalOriginalPrice;
+    public double getGrandTotalOriginal() {
+        return grandTotalOriginal;
     }
 
-    public void setGrandTotalOriginalPrice(double grandTotalOriginalPrice) {
-        this.grandTotalOriginalPrice = grandTotalOriginalPrice;
+    public void setGrandTotalOriginal(double grandTotalOriginal) {
+        this.grandTotalOriginal = grandTotalOriginal;
     }
 
-    public void addCartIdem(CartItem item){
-        String productId = String.valueOf(item.getProduct().getProductId());
-        if (cartItems.containsKey(productId)){
-            CartItem existingCartItem = cartItems.get(productId);
-            existingCartItem.setQuantity(existingCartItem.getQuantity()+item.getQuantity());
-            existingCartItem.setTotalDiscountedPrice(existingCartItem.getTotalDiscountedPrice() +
-                    item.getTotalDiscountedPrice());
-            existingCartItem.setTotalOriginalPrice(existingCartItem.getTotalOriginalPrice() +
-                    item.getTotalOriginalPrice());
-            cartItems.put(productId, existingCartItem);
-        }else{
-            cartItems.put(productId, item);
-        }
-        updateGrandTotal();
+    public double getGrandTotalDiscounted() {
+        return grandTotalDiscounted;
     }
 
-    public void removeCartItem(CartItem item){
-        int productId = item.getProduct().getProductId();
-        cartItems.remove(String.valueOf(productId));
-        updateGrandTotal();
+    public void setGrandTotalDiscounted(double grandTotalDiscounted) {
+        this.grandTotalDiscounted = grandTotalDiscounted;
     }
-
-    public void updateGrandTotal(){
-        grandTotalDiscountedPrice =0;
-        grandTotalOriginalPrice = 0;
-        for (CartItem item : cartItems.values()){
-            grandTotalDiscountedPrice = grandTotalDiscountedPrice + item.getTotalDiscountedPrice();
-            grandTotalOriginalPrice = grandTotalOriginalPrice + item.getTotalOriginalPrice();
-        }
-    }
-
 }

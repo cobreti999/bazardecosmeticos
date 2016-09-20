@@ -8,7 +8,7 @@
         <section>
             <div class="jumbotron">
                 <div class="container">
-                    <h1 class="alert alert-danger"> Usuário criado com sucesso!!</h1>
+                    <h1 class="alert alert-success"> Usuário criado com sucesso!!</h1>
                 </div>
             </div>
         </section>
@@ -16,7 +16,7 @@
         <section>
             <div class="container">
                 <p>
-                    <a href="<spring:url value="/product/productList/all" />" class="btn btn-primary">
+                    <a href="<spring:url value="/product/productList" />" class="btn btn-primary">
                         <span class="glyphicon-hand-left glyphicon"></span> Produtos
                     </a>
                 </p>
