@@ -10,11 +10,10 @@
     width: 100%; !important;
     height: auto; !important;
 }
-ble{
+.table{
     table-layout: fixed;
     overflow: auto;
 }
-.ta
 
 .table th{
     text-align: center;

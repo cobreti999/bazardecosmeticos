@@ -17,11 +17,11 @@ public class HomeController {
         return "index";
     }
 
-    /*
-    @RequestMapping("/about")
+
+    @RequestMapping("/aboutus")
     public String about() {
-        return "about";
-    }*/
+        return "aboutUs";
+    }
 
     @RequestMapping("/login")
     public String login(@RequestParam(value="error", required = false) String error,

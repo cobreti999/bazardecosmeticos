@@ -58,8 +58,8 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="<c:url value="/" />">Home</a></li>
                                 <li><a href="<c:url value="#" />">Consultoras</a></li>
-                                <li><a href="<c:url value="/product/productList" />">Produtos</a></li>
-                                <li><a href="<c:url value="#"/>">Contato</a></li>
+                                <li><a href="<c:url value="/product/productList/all" />">Produtos</a></li>
+                                <li><a href="<c:url value="/aboutus"/>">Sobre o site</a></li>
                             </ul>
                             <ul class="nav navbar-nav pull-right">
                                 <c:if test="${pageContext.request.userPrincipal.name != null}">

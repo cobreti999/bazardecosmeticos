@@ -30,7 +30,7 @@
 
                     <br>
 
-                    <c:set var="url" scope="page" value="/product/productList" />
+                    <c:set var="url" scope="page" value="/product/productList/all" />
                     <c:if test="${isAdmin}">
                         <c:set var="url" scope="page" value="/admin/productInventory" />
                     </c:if>

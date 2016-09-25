@@ -22,7 +22,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping("/productList")
+    @RequestMapping("/productList/all")
     public String getAllProducts(Model model) {
         List<Product> products = productService.getProductList();
         model.addAttribute("products", products);
@@ -30,7 +30,7 @@ public class ProductController {
         return "productList";
     }
 
-    /*
+    //searchcondition is received in the index.jsp and then passed to productList
     @RequestMapping("/productList")
     public String getProductsByCategory(@RequestParam("searchCondition") String searchCondition, Model model) {
         List<Product> products = productService.getProductList();
@@ -38,7 +38,7 @@ public class ProductController {
         model.addAttribute("searchCondition", searchCondition);
 
         return "productList";
-    }*/
+    }
 
     @RequestMapping("/viewProduct/{productId}")
     public String viewProductByCategory(@PathVariable int productId, Model model) throws IOException {
