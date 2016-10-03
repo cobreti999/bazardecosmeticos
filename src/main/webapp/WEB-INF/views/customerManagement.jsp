@@ -20,6 +20,7 @@
                 <th>Nome de Usuário</th>
                 <th>Senha</th>
                 <th>Ativado</th>
+                <th>Ação</th>
             </tr>
             </thead>
             <c:forEach items="${customerList}" var="customer">
@@ -30,6 +31,11 @@
                     <td>${customer.username}</td>
                     <td>${customer.password}</td>
                     <td>${customer.enabled}</td>
+                    <td><a href="<spring:url value="/admin/customer/deleteCustomer/${customer.customerId}"/>">
+                            <span class="glyphicon glyphicon-remove"></span></a>
+                        <a href="<spring:url value="/admin/customer/editCustomer/${customer.customerId}"/>">
+                            <span class="glyphicon glyphicon-pencil"></span></a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

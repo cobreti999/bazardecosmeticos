@@ -82,5 +82,51 @@ public class CustomerDaoImpl implements CustomerDao {
         List<Customer> customerList = query.list();
         return customerList;
     }
+
+    public void editCustomer(Customer customer){
+        Session session = sessionFactory.getCurrentSession();
+        customer.getBillingAddress().setCustomer(customer);
+        customer.getShippingAddress().setCustomer(customer);
+        Cart cart = getCartByCustomerId(customer.getCustomerId());
+        /*Query query = session.createQuery("from Cart where customerId = ?");
+        query.setParameter(0, customer.getCustomerId());
+        Cart cart = (Cart) query.uniqueResult();*/
+        cart.setCustomer(customer);
+        customer.setCart(cart);
+        customer.setEnabled(true);
+        session.merge(customer);
+        session.merge(customer.getBillingAddress());
+        session.merge(customer.getShippingAddress());
+        session.flush();
+
+        //todo se usuario editar username e password nao funcionará.
+        //Preciso colocar atributo Users dentro de Customer
+    }
+
+    public void deleteCustomer(Customer customer){
+        Session session = sessionFactory.getCurrentSession();
+        //delete the user
+        Query query = session.createQuery("delete Users where customerId = ?");
+        query.setParameter(0, customer.getCustomerId());
+        query.executeUpdate();
+        query = session.createQuery("delete Authorities where username = ?");
+        query.setParameter(0, customer.getUsername());
+        query.executeUpdate();
+
+        //delete the dependencies
+        session.delete(customer.getCart());
+        session.delete(customer.getBillingAddress());
+        session.delete(customer.getShippingAddress());
+        //delete the customer
+        session.delete(customer);
+        session.flush();
+    }
+
+    public Cart getCartByCustomerId(int id){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Cart where customerId = ?");
+        query.setParameter(0, id);
+        return (Cart) query.uniqueResult();
+    }
 }
 

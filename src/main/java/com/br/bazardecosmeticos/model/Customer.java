@@ -35,11 +35,11 @@ public class Customer implements Serializable{
 
     private boolean enabled;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "billingAdressId")
     private BillingAddress billingAddress;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "shippingAdressId")
     private ShippingAddress shippingAddress;
 

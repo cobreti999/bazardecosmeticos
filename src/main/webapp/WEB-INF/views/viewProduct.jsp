@@ -25,7 +25,7 @@
                     <p><strong>Marca</strong> : ${product.productBrand}</p>
                     <p><strong>Tipo</strong> : ${product.productType}</p>
                     <p><strong>Preço original</strong> : ${product.productOriginalPrice} Reais</p>
-                    <p><strong>Desconto</strong> : ${product.productDiscount} Reais</p>
+                    <p><strong>Desconto</strong> : ${product.productDiscount} %</p>
                     <h4><strong>Preço final</strong> : ${product.productDiscountedPrice} Reais</h4>
 
                     <br>
