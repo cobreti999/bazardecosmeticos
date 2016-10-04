@@ -1,7 +1,9 @@
 package com.br.bazardecosmeticos.controller.admin;
 
 import com.br.bazardecosmeticos.model.Customer;
+import com.br.bazardecosmeticos.model.CustomerOrder;
 import com.br.bazardecosmeticos.model.Product;
+import com.br.bazardecosmeticos.service.CustomerOrderService;
 import com.br.bazardecosmeticos.service.ProductService;
 import com.br.bazardecosmeticos.service.impl.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class AdminHome {
     @Autowired
     private CustomerServiceImpl customerService;
 
+    @Autowired
+    private CustomerOrderService customerOrderService;
+
     @RequestMapping
     public String adminPage() {
         return "admin";
@@ -43,6 +48,13 @@ public class AdminHome {
         model.addAttribute(customerList);
 
         return "customerManagement";
+    }
+
+    @RequestMapping("/customerOrder")
+    public String orderManagement(Model model) {
+        List<CustomerOrder> customerOrderList = customerOrderService.getAllCustomerOrders();
+        model.addAttribute(customerOrderList);
+        return "customerOrderManagement";
     }
 
 }

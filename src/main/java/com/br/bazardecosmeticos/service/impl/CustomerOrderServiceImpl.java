@@ -6,6 +6,9 @@ import com.br.bazardecosmeticos.model.CartItem;
 import com.br.bazardecosmeticos.model.CustomerOrder;
 import com.br.bazardecosmeticos.service.CartService;
 import com.br.bazardecosmeticos.service.CustomerOrderService;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +53,9 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
         }
 
         return grandTotal;
+    }
+
+    public List<CustomerOrder> getAllCustomerOrders(){
+        return customerOrderDao.getAllCustomerOrders();
     }
 }
