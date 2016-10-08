@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="bazardecosmeticos:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="bazardecosmeticos-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="bazardecosmeticos:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Spring MVC-4.3.1.RELEASE" />
+          <element id="library" level="project" name="Spring-4.3.1.RELEASE" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
